@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration debug="false">
+
+	<!-- VARIABLE QUE USAREMOS PARA LA FECHA-->
+	<timestamp key="logDate" datePattern="dd-MM-yy"/>
+	
+	<appender name="LogbackJuanJesusFernandezv1"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		
+		
+		<!-- RUTA DEL LOG QUE SE GENERARÁ -->
+		<file>C://dev//logs//elb1JJFRJuanJesus-${logDate}.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<fileNamePattern>C://dev//logs//elb1JJFRJuanJesus-${logDate}.%i.log.zip</fileNamePattern>
+			
+		<!-- EL LOG PUEDE ESTAR FORMADO ENTRE 1 Y 3 ARCHIVOS -->
+			<minIndex>1</minIndex>
+			<maxIndex>3</maxIndex>
+		</rollingPolicy>
+		
+		<!-- TAMAÑO MÁXIMO DEL '.log' -->
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<maxFileSize>50KB</maxFileSize>
+		</triggeringPolicy>
+		
+		<!-- INFORMACIÓN QUE MOSTRARÁ EL '.log' -->
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS}[%thread] %-5level %logger{36} - [%method] -%msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	<!-- APPENDER PARA MOSTRAR POR CONSOLA -->
+	<appender name="ConsolaJJFR" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - [%method] - %msg%n</pattern>
+        </encoder>
+	</appender>
+	
+	<!-- NIVEL EN EL QUE ACTÚA EL LOGGER Y SU RAIZ -->
+	<root level="debug">
+		<appender-ref ref="LogbackJuanJesusFernandezv1"/>
+		<appender-ref ref="ConsolaJJFR"/>
+	</root>
+</configuration>
